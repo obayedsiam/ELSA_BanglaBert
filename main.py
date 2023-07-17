@@ -1,6 +1,6 @@
 import blsa_bert
 
-blsa_bert.predicted_sentiment("বাংলাদেশের আবহাওয়া ভালো, কিন্তু তাপমাত্রা বেশি")
+blsa_bert.predicted_sentiment("The service is good but the food was bad")
 
 #
 #
