@@ -5,8 +5,7 @@ from transformers import pipeline
 from sklearn.model_selection import train_test_split
 import torch
 from torch.utils.data import TensorDataset, DataLoader, random_split
-
-#
+from bnlp import NLTKTokenizer
 
 # example = "জামাটা অনেক অনেক সুন্দর, আপনারা চাইলে নিতে পারেন"
 
@@ -32,6 +31,7 @@ model = AutoModelForTokenClassification.from_pretrained("sagorsarker/mbert-benga
 #     return_tensors='pt'
 # )
 
+bnltk = NLTKTokenizer()
 tokenized_review_List = []
 tokenized_labels_List = []
 tag = []
@@ -40,8 +40,10 @@ ner_tag_list = []
 for SingleReview in review:
     # tokens = tokenizer(SingleReview, padding=True, truncation=True, return_tensors='pt')
     # ner_token = tokenizer(named_entity, padding=True, truncation=True, return_tensors='pt')
-    tokens = SingleReview+"".split()
-    ner_token = named_entity.split()
+    sentence_tokens = bnltk.sentence_tokenize(text)
+
+    word_Tokens = bnltk.word_tokenize(SingleReview)
+    ner_token = bnltk.sentence_tokenize(SingleReview)
     tokenized_review = tokens
     tokenized_review_List.append(tokenized_review)
     tag = []
